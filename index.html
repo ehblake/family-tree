@@ -272,51 +272,6 @@ function buildChart(){
     const iniEl=el('text',{x:0,y:AR[g]*0.35,'text-anchor':'middle','font-size':AR[g]*0.75,'font-family':'Georgia,serif',fill:isMissing?'#999':'#fff','font-weight':'bold',class:'av-initials'},avGrp);
     iniEl.textContent=ini;
 
-    // Name label
-    if(FS[g]>0&&!isMissing){
-      const labelR=RM[g]+AR[g]+4;
-      const[lx,ly]=p2c(labelR,g===0?0:ma);
-      const rot=g===0?0:textRot(ma);
-      const anc=g===0?'middle':textAnchor(ma);
-      const t=el('text',{
-        x:lx,y:ly,
-        'text-anchor':anc,
-        'font-size':FS[g],
-        fill:'#5a4a38',
-        transform:`rotate(${rot},${lx},${ly})`,
-        'dominant-baseline':'middle',
-        class:'label-text',
-        opacity:'0.85'
-      },txG);
-      t.textContent=g<=2?p.s:(g<=3?p.s:p.s.length>12?p.s.substring(0,11)+'.':p.s);
-      t.dataset.a=a;
-
-      // Dates below name for gen 0-2
-      if(g<=2&&p.dates){
-        const dateR=labelR+FS[g]+2;
-        const[dx,dy]=p2c(dateR,g===0?0:ma);
-        const dt=el('text',{
-          x:dx,y:dy,
-          'text-anchor':anc,
-          'font-size':FS[g]-1,
-          fill:'#999',
-          transform:`rotate(${rot},${dx},${dy})`,
-          'dominant-baseline':'middle',
-          class:'label-text',
-          opacity:'0.7'
-        },txG);
-        dt.textContent=p.dates;
-        dt.dataset.a=a;
-      }
-    }
-
-    // Center label special case
-    if(a===1){
-      const ct=el('text',{x:ax,y:ay+AR[0]+16,'text-anchor':'middle','font-size':'11',fill:'#5a3e28','font-weight':'bold'},txG);
-      ct.textContent='Edward Blake';
-      const cd=el('text',{x:ax,y:ay+AR[0]+28,'text-anchor':'middle','font-size':'9',fill:'#999'},txG);
-      cd.textContent='b. 1978 \u2022 Chicago, IL';
-    }
   }
 
   // === INTERACTION ===
