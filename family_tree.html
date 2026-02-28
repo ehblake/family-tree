@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blake Family Tree</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:#f5f0e8;overflow:hidden;height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:10px 20px 5px;background:#f5f0e8;z-index:10}
+header h1{font-size:22px;color:#5a3e28;margin-bottom:2px}
+header p{font-size:11px;color:#8a7560}
+#main{display:flex;flex:1;overflow:hidden}
+#chart-wrap{flex:1;position:relative;overflow:hidden;cursor:grab}
+#chart-wrap:active{cursor:grabbing}
+#chart-wrap svg{position:absolute;top:0;left:0}
+#detail{width:280px;background:#fff;border-left:1px solid #d4c4a8;padding:16px;overflow-y:auto;font-size:12px;display:none;flex-shrink:0}
+#detail.open{display:block}
+#detail h3{color:#5a3e28;font-size:14px;margin-bottom:2px}
+#detail .nickname{color:#888;font-style:italic;font-size:11px}
+#detail .sep{border-top:1px solid #e8ddd0;margin:8px 0}
+#detail .row{margin:3px 0;color:#555}
+#detail .row b{color:#444;font-weight:600}
+#detail .note{background:#fdf6ee;border-left:3px solid #c4a882;padding:6px 8px;margin:8px 0;font-size:11px;color:#666}
+#detail .wiki-link{display:inline-block;margin-top:8px;color:#4a7fa5;text-decoration:none;font-size:11px}
+#detail .wiki-link:hover{text-decoration:underline}
+#detail .close-btn{float:right;cursor:pointer;color:#999;font-size:16px;line-height:1}
+#detail .close-btn:hover{color:#333}
+#legend{display:flex;gap:14px;justify-content:center;padding:6px;background:#f5f0e8;flex-wrap:wrap;border-top:1px solid #e8ddd0}
+.leg{display:flex;align-items:center;gap:4px;font-size:10px;color:#777}
+.leg span{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.15)}
+#tooltip{display:none;position:fixed;background:rgba(40,30,20,.92);color:#fff;padding:8px 12px;border-radius:6px;font-size:11px;max-width:260px;pointer-events:none;z-index:100;line-height:1.5}
+.segment{cursor:pointer;transition:opacity .2s}
+.segment:hover{filter:brightness(1.08)}
+.avatar{cursor:pointer}
+.avatar .hover-ring{opacity:0;transition:opacity .2s}
+.avatar:hover .hover-ring{opacity:1}
+.dimmed .segment,.dimmed .avatar,.dimmed .label-text{opacity:0.3!important;transition:opacity .2s}
+.dimmed .highlight{opacity:1!important}
+.dimmed .highlight .segment{opacity:1!important}
+#zoom-controls{position:absolute;bottom:16px;right:16px;display:flex;flex-direction:column;gap:4px;z-index:10}
+#zoom-controls button{width:36px;height:36px;border:1px solid #c4b898;border-radius:8px;background:#fff;color:#5a3e28;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.1);transition:background .15s}
+#zoom-controls button:hover{background:#f5f0e8}
+#zoom-controls button:active{background:#e8ddd0}
+#zoom-controls .sep{height:1px;background:#d4c4a8;margin:2px 4px}
+</style>
+</head>
+<body>
+<header>
+<h1>The Blake / Dower Family Tree</h1>
+<p>Compilted February 2026</p>
+</header>
+<div id="main">
+<div id="chart-wrap">
+<div id="zoom-controls">
+<button id="zoom-in" title="Zoom in">+</button>
+<button id="zoom-out" title="Zoom out">&minus;</button>
+<div class="sep"></div>
+<button id="zoom-reset" title="Reset view" style="font-size:12px">&#8634;</button>
+</div>
+</div>
+<div id="detail"></div>
+</div>
+<div id="legend">
+<div class="leg"><span style="background:#4a8a55"></span> Irish</div>
+<div class="leg"><span style="background:#4a5f8a"></span> German</div>
+<div class="leg"><span style="background:#8a7a5a"></span> American-born</div>
+<div class="leg"><span style="background:#b8b3ab;border-style:dashed"></span> Unknown</div>
+</div>
+<div id="tooltip"></div>
+
+<script>
+// === DATA ===
+const D = {
+1:{name:"Edward Blake",s:"Edward Blake",dates:"b. 1978",b:"Sep 9, 1978",bp:"Chicago, IL",sex:"M",o:"us",info:"WikiTree tree manager. Married May 31, 2016 in Brooklyn, NYC.",wiki:"https://www.WikiTree.com/wiki/Blake-12721"},
+2:{name:"Philip Edward Blake",s:"Phil Blake",nick:"Phil",dates:"b. 1944",b:"Nov 7, 1944",bp:"Chicago, IL",sex:"M",o:"us",wiki:"https://www.WikiTree.com/wiki/Blake-12722"},
+3:{name:"Katherine Dower",s:"Katherine Dower",dates:"b. 1944",b:"Dec 27, 1944",bp:"Rochester, MN",sex:"F",o:"us",wiki:"https://www.WikiTree.com/wiki/Dower-326"},
+4:{name:"Thomas Matthew Blake",s:"Thomas Blake",dates:"1904\u20131970",b:"1904",bp:"Chicago, IL",d:"Oct 31, 1970",dp:"Chicago, IL",sex:"M",o:"us",info:"Chairman of the board of Littelfuse, Inc. (joined 1938). VP of YMCA of Chicago; founding chairman NW Suburban YMCA. Director of IL Manufacturers Assn. and First National Bank of Des Plaines. Lived in Wilmette, IL and Naples, FL. Died at Presbyterian-St. Luke\u2019s Hospital, age 67. Survived by wife Louise and sons Thomas and Philip.",wiki:"https://www.WikiTree.com/wiki/Blake-13353"},
+5:{name:"Louise Francis Penning",s:"Louise Penning",nick:"Mimi",dates:"1910\u20132000",b:"Aug 1910",d:"Oct 2, 2000",dp:"Wilmette, IL",sex:"F",o:"us",wiki:"https://www.WikiTree.com/wiki/Penning-246"},
+6:{name:"James Ward Dower",s:"Jim Dower",nick:"Jim",dates:"1917\u20131972",b:"Jun 6, 1917",bp:"Marengo, IA",d:"Nov 26, 1972",dp:"Bettendorf, IA",sex:"M",o:"us",info:"Partner in Doerr, Dower & Rehling law firm, Davenport. Married Mary K. Hurn in 1942 in New York, NY. U of Iowa Law School 1942. WWII Navy veteran (ensign\u2192lt. j.g., 1944). President Scott County Bar Assn. 1970. Six children: Margaret, Patricia, Katherine, Mary, James Jr., Thomas. Buried at Mt. Calvary Cemetery.",wiki:"https://www.WikiTree.com/wiki/Dower-348"},
+7:{name:"Mary Catherine Hurn",s:"Tink Hurn",nick:"Tink",dates:"1918\u20131998",b:"Oct 18, 1918",bp:"Algona, IA",d:"Dec 1, 1998",dp:"Madison, WI",sex:"F",o:"us",wiki:"https://www.WikiTree.com/wiki/Hurn-212"},
+8:{name:"Charles Blake",s:"Charles Blake",dates:"~1857\u20131944",b:"~1857",bp:"Platteville, WI",d:"1944",dp:"Rochester, MN",sex:"M",o:"us",wiki:"https://www.WikiTree.com/wiki/Blake-13354"},
+9:{name:"Mary Foy",s:"Mary Foy",dates:"1880\u20131925",b:"1880",d:"1925",sex:"F",o:"us",wiki:"https://www.WikiTree.com/wiki/Foy-1459"},
+10:{name:"Frank Penning",s:"Frank Penning",dates:"1880\u20131952",b:"1880",d:"1952",sex:"M",o:"us",wiki:"https://www.WikiTree.com/wiki/Penning-247"},
+11:{name:"Gertrude Hermsdorf",s:"Gertrude Hermsdorf",dates:"1874\u20131952",b:"1874",bp:"Dresden, Saxony",d:"1952",sex:"F",o:"german",wiki:"https://www.WikiTree.com/wiki/Hermsdorf-2"},
+12:{name:"James Martin Dower",s:"Jas. M. Dower",dates:"1868\u2013~1942",b:"Feb 27, 1868",bp:"Parnell, IA",d:"~1942",dp:"Marengo, IA",sex:"M",o:"us",wiki:"https://www.WikiTree.com/wiki/Dower-349"},
+13:{name:"Idella Bridget Kane",s:"Idella Kane",dates:"1880\u20131972",b:"Jan 3, 1880",bp:"Emmetsburg, IA",d:"Jun 11, 1972",dp:"Los Angeles, CA",sex:"F",o:"us",info:"Registered nurse at Mercy Hospital, Davenport (retired). Graduate of Mercy Hospital School of Nursing. Died age 92 while visiting daughter in LA. Four children: daughters (Mrs. Robert Palmer, Mrs. Neil Comerford), sons James and Robert. Buried at Mt. Calvary Cemetery, Davenport.",wiki:"https://www.WikiTree.com/wiki/Kane-4876"},
+14:{name:"William Patrick Hurn",s:"Billy Hurn",nick:"Billy",dates:"1875\u20131930",b:"Jun 6, 1875",bp:"New Berlin, IL",d:"Jul 25, 1930",dp:"Rochester, MN",sex:"M",o:"us",info:"Married Catharine Rustemeier Feb 14, 1901 in New Berlin, IL. Moved to Kossuth County, IA in 1910. Six children (one died in infancy): Paul, Bernard, Vincent, Margaret, Mary Catharine (Tink), plus infant. Knights of Columbus member. Died of cancer at age 55. Buried at Calvary Cemetery, Algona, IA.",wiki:"https://www.WikiTree.com/wiki/Hurn-232"},
+15:{name:"Catherine Elizabeth Rustemeier",s:"Catherine Rustemeier",dates:"1880\u20131957",b:"Sep 23, 1880",bp:"New Berlin, IL",d:"Mar 29, 1957",dp:"Rochester, MN",sex:"F",o:"us",info:"Married William P. Hurn Feb 14, 1901 in New Berlin. Moved to Kossuth County, IA 1910. Six children (one died in infancy): Paul, Bernard, Vincent, Margaret, Mary Catherine (Tink), plus infant buried at Calvary. Died at St. Mary\u2019s Hospital, Rochester after breaking hip. Sister: Sister Sebastian, Sacred Heart Convent, Springfield, IL.",wiki:"https://www.WikiTree.com/wiki/Rustermier-2"},
+16:{name:"John Blake",s:"John Blake",dates:"1835\u2013~1880",b:"1835",bp:"Co. Clare, Ireland",d:"~1880",sex:"M",o:"irish",wiki:"https://www.WikiTree.com/wiki/Blake-13414"},
+17:{name:"Julia Sullivan",s:"Julia Sullivan",dates:"1835\u2013~1880",b:"1835",bp:"Co. Clare, Ireland",d:"~1880",sex:"F",o:"irish",wiki:"https://www.WikiTree.com/wiki/Sullivan-24345"},
+18:{name:"Patrick Foy",s:"Patrick Foy",dates:"~1850\u2013~1900",b:"~1850",bp:"Ireland",d:"~1900",sex:"M",o:"irish",wiki:"https://www.WikiTree.com/wiki/Foy-1466"},
+19:{name:"Unknown",s:"?",dates:"",sex:"F",o:"x",m:1,info:"Wife of Patrick Foy \u2014 mother of Mary Foy. Completely unknown."},
+20:{name:"Unknown",s:"?",dates:"",sex:"M",o:"x",m:1,info:"Father of Frank Penning. Unknown."},
+21:{name:"Unknown",s:"?",dates:"",sex:"F",o:"x",m:1,info:"Mother of Frank Penning. Unknown."},
+22:{name:"Frederick Hermsdorf",s:"Fred. Hermsdorf",dates:"~1852\u2013~1926",b:"~1852",d:"~1926",sex:"M",o:"german",wiki:"https://www.WikiTree.com/wiki/Hermsdorf-3"},
+23:{name:"Auguste Marie Grossmann",s:"A.M. Grossmann",dates:"1854\u20131934",b:"1854",d:"1934",sex:"F",o:"german",wiki:"https://www.WikiTree.com/wiki/Grossmann-339"},
+24:{name:"John Dower",s:"John Dower",dates:"~1825\u20131904",b:"~1825",bp:"Co. Cork, Ireland",d:"Sep 23, 1904",dp:"Williamsburg, IA",sex:"M",o:"irish",info:"Died at 2:20pm, age 79. Emigrated as a young man; married Elizabeth Ward in the 1850s. Six children: Mary (Mrs. Rock, Gettysburg SD), Mrs. T.J. Mullin (Omaha), Mrs. John Ward (Parnell), Dr. T.J. Dower (Fonda), J.M. Dower (Williamsburg), and one more (name cut off). Buried at St. Joseph\u2019s Cemetery, Parnell.",wiki:"https://www.WikiTree.com/wiki/Dower-350"},
+25:{name:"Elizabeth Ward",s:"Elizabeth Ward",dates:"1827\u20131914",b:"Dec 1827",bp:"Co. Cavan, Ireland",d:"May 23, 1914",dp:"Omaha, NE",sex:"F",o:"irish",wiki:"https://www.WikiTree.com/wiki/Ward-49015"},
+26:{name:"John J Kane",s:"John J Kane",dates:"1842\u20131925",b:"Dec 25, 1842",bp:"Co. Roscommon, Ireland",d:"Mar 2, 1925",dp:"Emmetsburg, IA",sex:"M",o:"irish",info:"Civil War veteran, Co. I, 17th Wisconsin Infantry. Musician (fife). Immigrated 1863.",wiki:"https://www.WikiTree.com/wiki/Kane-4877"},
+27:{name:"Sarah Jane McNally",s:"Sarah McNally",dates:"1852\u20131924",b:"Jul 18, 1852",bp:"Center, WI",d:"Mar 19, 1924",dp:"Emmetsburg, IA",sex:"F",o:"us",wiki:"https://www.WikiTree.com/wiki/McNally-1980"},
+28:{name:"Frank Hurn",s:"Frank Hurn",dates:"~1843\u2013?",b:"~1843",bp:"Missouri",d:"",sex:"M",o:"us",wiki:"https://www.WikiTree.com/wiki/Hurn-233"},
+29:{name:"Elizabeth Brannegan",s:"Eliz. Brannegan",dates:"~1838\u20131918",b:"~1838",bp:"New York",d:"1918",sex:"F",o:"us",info:"Parents: Patrick Branegan & Elizabeth Brannegan. Listed as Rose Branigan in some records.",wiki:"https://www.WikiTree.com/wiki/Branigan-147"},
+30:{name:"Norbertus Rustemier",s:"Norb. Rustemier",nick:"Robert",dates:"~1825\u2013~1881",b:"~1825",bp:"East Prussia, Germany",d:"~1881",dp:"New Berlin, IL",sex:"M",o:"german",wiki:"https://www.WikiTree.com/wiki/Rustemier-11"},
+31:{name:"Mary Davey",s:"Mary Davey",dates:"~1846\u2013~1916",b:"~1846",bp:"Connaught, Ireland",d:"~1916",dp:"New Berlin, IL",sex:"F",o:"irish",wiki:"https://www.WikiTree.com/wiki/Davey-5018"},
+44:{name:"Michael Hermsdorf",s:"Mich. Hermsdorf",dates:"1825\u2013~1890",b:"Feb 1, 1825",bp:"Zechau, Saxe-Altenburg",d:"~1890",sex:"M",o:"german",wiki:"https://www.WikiTree.com/wiki/Hermsdorf-4"},
+45:{name:"Anna Christine M\u00fcller",s:"A.C. M\u00fcller",dates:"1823\u20131859",b:"Jul 22, 1823",bp:"Wintersdorf, Thuringia",d:"May 4, 1859",dp:"Wintersdorf",sex:"F",o:"german",wiki:"https://www.WikiTree.com/wiki/M%C3%BCller-18549"},
+54:{name:"Myles McNally Sr.",s:"Myles McNally",dates:"~1808\u20131891",b:"~1808",bp:"Co. Mayo, Ireland",d:"Oct 4, 1891",dp:"Emmetsburg, IA",sex:"M",o:"irish"},
+55:{name:"Mary McDonel",s:"Mary McDonel",dates:"1826\u20131899",b:"1826",bp:"Co. Down/Cavan, Ireland",d:"Mar 3, 1899",dp:"Emmetsburg, IA",sex:"F",o:"irish"},
+58:{name:"Patrick Branegan",s:"P. Branegan",dates:"",sex:"M",o:"irish",info:"Father of Elizabeth Brannegan (#29). Irish origin."},
+59:{name:"Elizabeth Brannegan Sr.",s:"E. Brannegan Sr.",dates:"",sex:"F",o:"irish",info:"Mother of Elizabeth Brannegan (#29)."}
+};
+
+// Fill in missing gen5 slots
+for(let a=32;a<=63;a++){if(!D[a]){
+  const par=Math.floor(a/2);
+  if(D[par]){D[a]={name:"Unknown",s:"?",dates:"",sex:a%2===0?"M":"F",o:"x",m:1,info:"Parents unknown"}}
+}}
+
+// === CONFIG ===
+const GENS=6;
+const RI=[0,58,148,238,333,438]; // inner radius per gen
+const RO=[44,140,230,325,430,545]; // outer radius per gen
+const RM=[0,99,189,281,381,491]; // mid radius (avatar)
+const AR=[38,27,22,18,14,10]; // avatar radius per gen
+const FS=[11,9,8,0,0,0]; // font size (0=none) - labels only for gen 0-2
+const GAP=0.7; // degrees gap between segments
+
+const COL={
+  us_M:'#c9b896',us_F:'#c9b896',
+  irish_M:'#8aba90',irish_F:'#8aba90',
+  german_M:'#8a9fc5',german_F:'#8a9fc5',
+  x_M:'#ddd8d0',x_F:'#ddd8d0',
+  av_us:'#8a7a5a',
+  av_irish:'#4a8a55',
+  av_german:'#4a5f8a',
+  av_x:'#b8b3ab'
+};
+
+// === UTILS ===
+function p2c(r,deg){const rad=(deg-90)*Math.PI/180;return[r*Math.cos(rad),r*Math.sin(rad)]}
+function gen(a){return Math.floor(Math.log2(a))}
+function angles(a){const g=gen(a),i=a-(1<<g),span=360/(1<<g);return{s:i*span-90+GAP,e:(i+1)*span-90-GAP,m:(i+.5)*span-90,g}}
+function arcPath(ri,ro,sa,ea){
+  const[ox1,oy1]=p2c(ro,sa),[ox2,oy2]=p2c(ro,ea),[ix2,iy2]=p2c(ri,ea),[ix1,iy1]=p2c(ri,sa);
+  const la=ea-sa>180?1:0;
+  return`M${ox1},${oy1}A${ro},${ro},0,${la},1,${ox2},${oy2}L${ix2},${iy2}A${ri},${ri},0,${la},0,${ix1},${iy1}Z`
+}
+function segCol(p){const k=p.o+'_'+p.sex;return COL[k]||COL.x_M}
+function avCol(p){if(p.m)return COL.av_x;return COL['av_'+p.o]||COL.av_us}
+function initials(p){if(p.m)return'?';const parts=p.name.split(' ').filter(x=>x&&x!=='Sr.'&&x!=='Jr.');return(parts[0]?parts[0][0]:'')+(parts.length>1?parts[parts.length-1][0]:'')}
+function lineage(a){const path=[];let c=a;while(c>=1){path.push(c);c=Math.floor(c/2)}return path}
+function textRot(midA){let r=midA-90;if(midA>90&&midA<270)r+=180;return r}
+function textAnchor(midA){return(midA>90&&midA<270)?'end':'start'}
+
+// === SVG BUILDER ===
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){
+  const e=document.createElementNS(NS,tag);
+  for(const[k,v]of Object.entries(attrs||{}))e.setAttribute(k,v);
+  if(parent)parent.appendChild(e);return e
+}
+
+function buildChart(){
+  const wrap=document.getElementById('chart-wrap');
+  const W=wrap.clientWidth,H=wrap.clientHeight;
+  const svg=el('svg',{xmlns:NS,viewBox:'-600 -600 1200 1200',width:W,height:H});
+  wrap.appendChild(svg);
+
+  // Defs
+  const defs=el('defs',{},svg);
+  const shadow=el('filter',{id:'shadow',x:'-20%',y:'-20%',width:'140%',height:'140%'},defs);
+  el('feDropShadow',{dx:'0',dy:'1','stdDeviation':'2','flood-color':'rgba(0,0,0,0.2)'},shadow);
+
+  // Background
+  el('circle',{cx:0,cy:0,r:560,fill:'#f5f0e8',stroke:'none'},svg);
+
+  // Gen boundary rings
+  const ringG=el('g',{opacity:'0.3'},svg);
+  for(let g=0;g<GENS;g++){
+    el('circle',{cx:0,cy:0,r:RO[g],fill:'none',stroke:'#c4b898','stroke-width':0.5,'stroke-dasharray':'3,3'},ringG);
+  }
+
+  // Gen labels
+  const lblG=el('g',{},svg);
+  const genNames=['You','Parents','Grandparents','Great-Grandparents','2x Great-Grandparents','3x Great-Grandparents'];
+  for(let g=1;g<GENS;g++){
+    const t=el('text',{x:0,y:-(RO[g]+4),'text-anchor':'middle','font-size':'6','font-style':'italic',fill:'#a89878',opacity:'0.7'},lblG);
+    t.textContent=genNames[g];
+  }
+
+  // Side labels
+  const patL=el('text',{x:0,y:-(RO[5]+18),'text-anchor':'middle','font-size':'9','letter-spacing':'3',fill:'#8a7560',opacity:'0.5',transform:'rotate(-0)'},svg);
+  patL.textContent='PATERNAL \u2190';
+  const matL=el('text',{x:0,y:RO[5]+24,'text-anchor':'middle','font-size':'9','letter-spacing':'3',fill:'#8a7560',opacity:'0.5'},svg);
+  matL.textContent='\u2192 MATERNAL';
+
+  // Groups
+  const segG=el('g',{id:'segs'},svg);
+  const conG=el('g',{id:'cons',opacity:'0.15'},svg);
+  const avG=el('g',{id:'avs'},svg);
+  const txG=el('g',{id:'txs'},svg);
+
+  // Track groups per person for lineage highlighting
+  const groups={};
+
+  // Draw each person
+  const sortedKeys=Object.keys(D).map(Number).sort((a,b)=>a-b);
+
+  for(const a of sortedKeys){
+    const p=D[a];
+    const{s:sa,e:ea,m:ma,g}=angles(a);
+    const isMissing=!!p.m;
+    const grp=el('g',{'data-a':a,class:'person-group'},svg);
+    groups[a]=grp;
+
+    // Arc segment
+    if(g>0){
+      const path=el('path',{
+        d:arcPath(RI[g],RO[g],sa,ea),
+        fill:segCol(p),
+        stroke:'#fff','stroke-width':'1',
+        opacity:isMissing?'0.35':'0.75',
+        class:'segment',
+        'stroke-dasharray':isMissing?'3,2':'none'
+      },segG);
+      path.dataset.a=a;
+    }
+
+    // Connector line to child
+    if(g>0&&g<=5){
+      const childA=Math.floor(a/2);
+      if(D[childA]){
+        const cm=angles(childA).m;
+        const[x1,y1]=p2c(RI[g],ma);
+        const[x2,y2]=p2c(RO[g-1],ma);
+        el('line',{x1,y1,x2,y2,stroke:'#c4b898','stroke-width':'0.5'},conG);
+      }
+    }
+
+    // Avatar circle
+    const[ax,ay]=p2c(RM[g],g===0?0:ma);
+    const avGrp=el('g',{
+      class:'avatar',
+      transform:`translate(${ax},${ay})`,
+      filter:'url(#shadow)'
+    },avG);
+    avGrp.dataset.a=a;
+
+    // Clip path for circular photo masking
+    const clipId='clip-'+a;
+    const clipPath=el('clipPath',{id:clipId},defs);
+    el('circle',{cx:0,cy:0,r:AR[g]},clipPath);
+
+    // Hover glow ring (hidden by default, shown on CSS hover)
+    el('circle',{cx:0,cy:0,r:AR[g]+5,fill:'none',stroke:'#c4a050','stroke-width':'2.5',class:'hover-ring'},avGrp);
+    // White border ring
+    el('circle',{cx:0,cy:0,r:AR[g]+2,fill:'#fff'},avGrp);
+    // Colored circle (fallback behind photo)
+    el('circle',{cx:0,cy:0,r:AR[g],fill:isMissing?'#d4d0c8':avCol(p),class:'av-bg'},avGrp);
+    // Photo image placeholder (hidden until loaded)
+    const img=el('image',{
+      x:-AR[g],y:-AR[g],width:AR[g]*2,height:AR[g]*2,
+      'clip-path':`url(#${clipId})`,
+      class:'av-photo',
+      style:'display:none',
+      preserveAspectRatio:'xMidYMid slice'
+    },avGrp);
+    img.dataset.a=a;
+    // Initials (shown as fallback when no photo)
+    const ini=initials(p);
+    const iniEl=el('text',{x:0,y:AR[g]*0.35,'text-anchor':'middle','font-size':AR[g]*0.75,'font-family':'Georgia,serif',fill:isMissing?'#999':'#fff','font-weight':'bold',class:'av-initials'},avGrp);
+    iniEl.textContent=ini;
+
+    // Name label
+    if(FS[g]>0&&!isMissing){
+      const labelR=RM[g]+AR[g]+4;
+      const[lx,ly]=p2c(labelR,g===0?0:ma);
+      const rot=g===0?0:textRot(ma);
+      const anc=g===0?'middle':textAnchor(ma);
+      const t=el('text',{
+        x:lx,y:ly,
+        'text-anchor':anc,
+        'font-size':FS[g],
+        fill:'#5a4a38',
+        transform:`rotate(${rot},${lx},${ly})`,
+        'dominant-baseline':'middle',
+        class:'label-text',
+        opacity:'0.85'
+      },txG);
+      t.textContent=g<=2?p.s:(g<=3?p.s:p.s.length>12?p.s.substring(0,11)+'.':p.s);
+      t.dataset.a=a;
+
+      // Dates below name for gen 0-2
+      if(g<=2&&p.dates){
+        const dateR=labelR+FS[g]+2;
+        const[dx,dy]=p2c(dateR,g===0?0:ma);
+        const dt=el('text',{
+          x:dx,y:dy,
+          'text-anchor':anc,
+          'font-size':FS[g]-1,
+          fill:'#999',
+          transform:`rotate(${rot},${dx},${dy})`,
+          'dominant-baseline':'middle',
+          class:'label-text',
+          opacity:'0.7'
+        },txG);
+        dt.textContent=p.dates;
+        dt.dataset.a=a;
+      }
+    }
+
+    // Center label special case
+    if(a===1){
+      const ct=el('text',{x:ax,y:ay+AR[0]+16,'text-anchor':'middle','font-size':'11',fill:'#5a3e28','font-weight':'bold'},txG);
+      ct.textContent='Edward Blake';
+      const cd=el('text',{x:ax,y:ay+AR[0]+28,'text-anchor':'middle','font-size':'9',fill:'#999'},txG);
+      cd.textContent='b. 1978 \u2022 Chicago, IL';
+    }
+  }
+
+  // === INTERACTION ===
+  const tooltip=document.getElementById('tooltip');
+  const detail=document.getElementById('detail');
+
+  function showTooltip(a,e){
+    const p=D[a];if(!p)return;
+    let html=`<b>${p.name}</b>`;
+    if(p.b||p.d){
+      const bStr=p.b||'?';
+      const dStr=p.d||'';
+      html+=dStr?`<br>${bStr} \u2013 ${dStr}`:`<br>b. ${bStr}`;
+    }
+    tooltip.innerHTML=html;
+    tooltip.style.display='block';
+    tooltip.style.left=(e.clientX+12)+'px';
+    tooltip.style.top=(e.clientY+12)+'px';
+  }
+
+  function hideTooltip(){tooltip.style.display='none'}
+
+  function highlightLineage(a){
+    const path=lineage(a);
+    svg.classList.add('dimmed');
+    for(const id of path){
+      // Highlight segments
+      segG.querySelectorAll(`[data-a="${id}"]`).forEach(el=>el.classList.add('highlight'));
+      avG.querySelectorAll(`[data-a="${id}"]`).forEach(el=>el.classList.add('highlight'));
+      txG.querySelectorAll(`[data-a="${id}"]`).forEach(el=>el.classList.add('highlight'));
+    }
+  }
+  function clearHighlight(){
+    svg.classList.remove('dimmed');
+    svg.querySelectorAll('.highlight').forEach(el=>el.classList.remove('highlight'));
+  }
+
+  function showDetail(a){
+    const p=D[a];if(!p)return;
+    const par=Math.floor(a/2);
+    const father=D[a*2];
+    const mother=D[a*2+1];
+    let h=`<span class="close-btn" onclick="document.getElementById('detail').classList.remove('open')">&times;</span>`;
+    h+=`<h3>${p.name}</h3>`;
+    if(p.nick)h+=`<div class="nickname">"${p.nick}"</div>`;
+    h+=`<div class="sep"></div>`;
+    if(p.b)h+=`<div class="row"><b>Born:</b> ${p.b}</div>`;
+    if(p.bp)h+=`<div class="row" style="margin-left:12px">${p.bp}</div>`;
+    if(p.d)h+=`<div class="row"><b>Died:</b> ${p.d}</div>`;
+    if(p.dp)h+=`<div class="row" style="margin-left:12px">${p.dp}</div>`;
+    h+=`<div class="sep"></div>`;
+    const origin={us:'American-born',irish:'Irish immigrant',german:'German immigrant',x:'Unknown'}[p.o]||'Unknown';
+    h+=`<div class="row"><b>Heritage:</b> ${origin}</div>`;
+    if(father)h+=`<div class="row"><b>Father:</b> ${father.name}</div>`;
+    if(mother)h+=`<div class="row"><b>Mother:</b> ${mother.name}</div>`;
+    if(a>1&&D[par])h+=`<div class="row"><b>Child:</b> ${D[par].name}</div>`;
+    if(p.info)h+=`<div class="note">${p.info}</div>`;
+    if(p.wiki)h+=`<a class="wiki-link" href="${p.wiki}" target="_blank">View on WikiTree \u2192</a>`;
+    detail.innerHTML=h;
+    detail.classList.add('open');
+  }
+
+  // Event delegation
+  svg.addEventListener('mousemove',(e)=>{
+    const t=e.target.closest('[data-a]');
+    if(t){
+      const a=parseInt(t.dataset.a);
+      showTooltip(a,e);
+      highlightLineage(a);
+    }else{
+      hideTooltip();clearHighlight();
+    }
+  });
+  svg.addEventListener('mouseleave',()=>{hideTooltip();clearHighlight()});
+  svg.addEventListener('click',(e)=>{
+    const t=e.target.closest('[data-a]');
+    if(t)showDetail(parseInt(t.dataset.a));
+  });
+
+  // === ZOOM & PAN ===
+  let scale=1,targetScale=1,tx=0,ty=0,dragging=false,lastX,lastY,animFrame=null;
+  svg.style.transformOrigin='center center';
+
+  function updateView(){svg.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`}
+
+  function animateZoom(){
+    const diff=targetScale-scale;
+    if(Math.abs(diff)<0.005){scale=targetScale;updateView();animFrame=null;return}
+    scale+=diff*0.25;
+    updateView();
+    animFrame=requestAnimationFrame(animateZoom);
+  }
+
+  function zoomTo(newScale){
+    targetScale=Math.max(0.3,Math.min(5,newScale));
+    if(!animFrame)animFrame=requestAnimationFrame(animateZoom);
+  }
+
+  // Trackpad/scroll: accumulate delta for smooth zoom
+  let scrollAccum=0,scrollTimer=null;
+  wrap.addEventListener('wheel',(e)=>{
+    e.preventDefault();
+    // Normalize: trackpads send small deltas, mice send big ones
+    const normalized=e.deltaMode===1?e.deltaY*40:e.deltaY;
+    scrollAccum+=normalized;
+    clearTimeout(scrollTimer);
+    scrollTimer=setTimeout(()=>{scrollAccum=0},150);
+    // Apply zoom based on accumulated scroll
+    const factor=Math.pow(0.998,scrollAccum);
+    zoomTo(targetScale*factor);
+    scrollAccum*=0.5; // dampen
+  },{passive:false});
+
+  // Drag to pan
+  wrap.addEventListener('mousedown',(e)=>{
+    if(e.target.closest('#zoom-controls'))return;
+    dragging=true;lastX=e.clientX;lastY=e.clientY;
+  });
+  window.addEventListener('mousemove',(e)=>{
+    if(!dragging)return;
+    tx+=e.clientX-lastX;ty+=e.clientY-lastY;
+    lastX=e.clientX;lastY=e.clientY;updateView();
+  });
+  window.addEventListener('mouseup',()=>{dragging=false});
+
+  // Double-click to zoom in on a spot
+  wrap.addEventListener('dblclick',(e)=>{
+    if(e.target.closest('#zoom-controls'))return;
+    zoomTo(targetScale*1.5);
+  });
+
+  // Zoom buttons
+  document.getElementById('zoom-in').addEventListener('click',()=>zoomTo(targetScale*1.4));
+  document.getElementById('zoom-out').addEventListener('click',()=>zoomTo(targetScale/1.4));
+  document.getElementById('zoom-reset').addEventListener('click',()=>{
+    targetScale=1;tx=0;ty=0;
+    if(!animFrame)animFrame=requestAnimationFrame(animateZoom);
+  });
+
+  // Resize
+  window.addEventListener('resize',()=>{
+    svg.setAttribute('width',wrap.clientWidth);
+    svg.setAttribute('height',wrap.clientHeight);
+  });
+}
+
+buildChart();
+
+// === LOAD LOCAL PHOTOS ===
+function loadPhotos(){
+  // Try loading photos/N.jpg for each person
+  for(const aStr of Object.keys(D)){
+    const a=parseInt(aStr);
+    const imgEl=document.querySelector(`.av-photo[data-a="${a}"]`);
+    if(!imgEl)continue;
+    const testImg=new Image();
+    testImg.onload=function(){
+      imgEl.setAttributeNS('http://www.w3.org/1999/xlink','href',`photos/${a}.jpg`);
+      imgEl.setAttribute('href',`photos/${a}.jpg`);
+      imgEl.style.display='';
+      const parent=imgEl.parentNode;
+      const initEl=parent.querySelector('.av-initials');
+      if(initEl)initEl.style.display='none';
+    };
+    testImg.src=`photos/${a}.jpg`;
+  }
+}
+loadPhotos();
+</script>
+</body>
+</html>

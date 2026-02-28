@@ -1,0 +1,645 @@
+0 HEAD
+1 SOUR WikiTree.com
+2 NAME WikiTree: The Free Family Tree
+2 CORP Interesting.com, Inc.
+1 DATE 27 Feb 2026
+2 TIME 02:15:18 UTC
+1 CHAR UTF-8
+1 FILE 41811150-ae3825.ged
+1 COPR Interesting.com, Inc. and Edward Blake
+1 SUBM @SUBM@
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 NOTE This file contains private information and may not be redistributed, published, or made public.
+0 @SUBM@ SUBM
+1 NAME Edward /Blake/
+
+0 @I1@ INDI
+1 NAME Philip Edward /Blake/
+2 GIVN Philip
+2 _PGVN Phil
+2 _MIDN Edward
+2 SURN Blake
+1 SEX M
+1 BIRT
+2 DATE 7 Nov 1944
+2 PLAC Chicago, Cook, Illinois, United States
+1 WWW https://www.WikiTree.com/wiki/Blake-12722 
+1 FAMC @F1@
+1 FAMS @F5@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Philip was born in 1944. 
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Firsthand citation
+1 REFN 41811210
+2 TYPE wikitree.user_id
+1 REFN 46135630
+2 TYPE wikitree.page_id
+1 REFN 10
+2 TYPE wikitree.privacy
+1 NOTE This person is Unlisted on WikiTree, the strictest privacy level. Be very cautious about sharing their information.
+0 @I2@ INDI
+1 NAME Thomas Matthew /Blake/
+2 GIVN Thomas
+2 _MIDN Matthew
+2 SURN Blake
+1 SEX M
+1 BIRT
+2 DATE 1904
+1 DEAT
+2 DATE 31 Oct 1970
+2 PLAC Chicago, Cook, Illinois, United States
+1 WWW https://www.WikiTree.com/wiki/Blake-13353 
+1 FAMC @F2@
+1 FAMS @F1@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Thomas was born about 1904.  He passed away in 1970.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archives and photo collection
+1 REFN 44173945
+2 TYPE wikitree.user_id
+1 REFN 48776107
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Blake-13353.jpg
+2 TITL Family portrait
+2 PLAC 1955
+2 DATE 
+0 @I3@ INDI
+1 NAME Louise Francis /Penning/
+2 GIVN Louise
+2 _MIDN Francis
+2 NICK Mimi
+2 SURN Penning
+2 _MARN Blake
+1 SEX F
+1 BIRT
+2 DATE Aug 1910
+1 DEAT
+2 DATE 2 Oct 2000
+2 PLAC Wilmette, Cook, Illinois, United States
+1 WWW https://www.WikiTree.com/wiki/Penning-246 
+1 FAMC @F3@
+1 FAMS @F1@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Louise was born in 1910.  She passed away in 2000.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Family archives of Edward Blake
+1 REFN 44173514
+2 TYPE wikitree.user_id
+1 REFN 48775633
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Penning-246.jpg
+2 TITL Family photo 1955
+2 PLAC Chicago, Cook, Illinois, United States
+2 DATE 1955
+0 @I4@ INDI
+1 NAME Katherine Dower /Dower/
+2 GIVN Katherine
+2 _MIDN Dower
+2 SURN Dower
+2 _MARN Blake
+2 _AKA Dower
+1 SEX F
+1 BIRT
+2 DATE 27 Dec 1944
+2 PLAC Rochester, Olmsted, Minnesota, United States
+1 WWW https://www.WikiTree.com/wiki/Dower-326 
+1 FAMC @F4@
+1 FAMS @F5@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Katherine was born in 1944. 
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Firsthand citation
+1 REFN 41811252
+2 TYPE wikitree.user_id
+1 REFN 46135676
+2 TYPE wikitree.page_id
+1 REFN 10
+2 TYPE wikitree.privacy
+1 NOTE This person is Unlisted on WikiTree, the strictest privacy level. Be very cautious about sharing their information.
+0 @I5@ INDI
+1 NAME Matthew Dower /Blake/
+2 GIVN Matthew
+2 _MIDN Dower
+2 SURN Blake
+1 SEX M
+1 BIRT
+2 DATE 19 Jan 1976
+2 PLAC Chicago, Cook, Illinois, United States
+1 WWW https://www.WikiTree.com/wiki/Blake-13356 
+1 FAMC @F5@
+1 NOTE == Biography ==
+2 CONT 
+2 CONC Matthew was born in 1976. He is the son of [[Blake-12722|Phil Blake]] 
+2 CONC and [[Dower-326|Katherine Dower]]. Matthew is still living. 
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake Family tree archives
+1 REFN 44174590
+2 TYPE wikitree.user_id
+1 REFN 48776821
+2 TYPE wikitree.page_id
+1 REFN 10
+2 TYPE wikitree.privacy
+1 NOTE This person is Unlisted on WikiTree, the strictest privacy level. Be very cautious about sharing their information.
+0 @I6@ INDI
+1 NAME Edward  /Blake/
+2 GIVN Edward
+2 SURN Blake
+1 SEX M
+1 BIRT
+2 DATE 9 Sep 1978
+2 PLAC Chicago, Cook, Illinois, United States
+1 EMAIL edwardhblake@gmail.com
+1 WWW https://www.WikiTree.com/wiki/Blake-12721 
+1 FAMC @F5@
+1 FAMS @F10@
+1 NOTE == Biography ==
+2 CONT The biography for Edward Blake is empty. What can you add?
+2 CONT 
+2 CONT == Sources ==
+2 CONT * First-hand information. Entered by Edward Blake at registration.
+1 REFN 41811150
+2 TYPE wikitree.user_id
+1 REFN 46135562
+2 TYPE wikitree.page_id
+1 REFN 40
+2 TYPE wikitree.privacy
+1 NOTE This person is privacy-protected on WikiTree. If you did not add their information, do not share it with anyone.
+0 @I7@ INDI
+1 NAME Daniel Penning /Blake/
+2 GIVN Daniel
+2 _MIDN Penning
+2 SURN Blake
+1 SEX M
+1 BIRT
+2 DATE 9 Oct 1981
+2 PLAC Madison, Dane, Wisconsin, United States
+1 WWW https://www.WikiTree.com/wiki/Blake-13357 
+1 FAMC @F5@
+1 NOTE == Biography ==
+2 CONT 
+2 CONC Daniel was born in 1981. He is the son of [[Blake-12722|Phil Blake]] a
+2 CONC nd [[Dower-326|Katherine Dower]]. Daniel is still living. 
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archive collection
+1 REFN 44174598
+2 TYPE wikitree.user_id
+1 REFN 48776829
+2 TYPE wikitree.page_id
+1 REFN 10
+2 TYPE wikitree.privacy
+1 NOTE This person is Unlisted on WikiTree, the strictest privacy level. Be very cautious about sharing their information.
+0 @I8@ INDI
+1 NAME Charles  /Blake/
+2 GIVN Charles
+2 SURN Blake
+1 SEX M
+1 BIRT
+2 DATE ABT 1857
+2 PLAC Platteville, Grant, Wisconsin, United States
+1 DEAT
+2 DATE 1944
+2 PLAC Rochester, Olmsted, Minnesota, United States
+1 WWW https://www.WikiTree.com/wiki/Blake-13354 
+1 FAMC @F6@
+1 FAMS @F2@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Charles was born in 1865.  He passed away in 1944.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archives and photo collection
+1 REFN 44174236
+2 TYPE wikitree.user_id
+1 REFN 48776430
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Blake-13354.jpg
+2 TITL Charles Blake
+2 DATE 1942
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Blake-13354-1.jpg
+2 TITL Charles and baby Thomas Blake 
+2 PLAC Chicago, Cook, Illinois, United States
+2 DATE 1939
+0 @I9@ INDI
+1 NAME Mary  /Foy/
+2 GIVN Mary
+2 SURN Foy
+1 SEX F
+1 BIRT
+2 DATE 1880
+1 DEAT
+2 DATE 1925
+1 WWW https://www.WikiTree.com/wiki/Foy-1459 
+1 FAMC @F7@
+1 FAMS @F2@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Mary was born in 1880.  She passed away in 1925.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archive and photo collection
+1 REFN 44174230
+2 TYPE wikitree.user_id
+1 REFN 48776424
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Foy-1459.jpg
+2 TITL Mary Jane Blake (Foy)
+2 DATE 1900
+0 @I10@ INDI
+1 NAME John  /Blake/
+2 GIVN John
+2 SURN Blake
+1 SEX M
+1 BIRT
+2 DATE 1835
+2 PLAC County Clare, Ireland
+1 DEAT
+2 DATE ABT 1880
+1 WWW https://www.WikiTree.com/wiki/Blake-13414 
+1 FAMS @F6@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT John was born about 1835.  He passed away about 1880.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake Family archives / records
+1 REFN 44383250
+2 TYPE wikitree.user_id
+1 REFN 49016178
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+0 @I11@ INDI
+1 NAME Julia  /Sullivan/
+2 GIVN Julia
+2 SURN Sullivan
+2 _MARN Blake
+1 SEX F
+1 BIRT
+2 DATE 1835
+2 PLAC County Clare, Ireland
+1 DEAT
+2 DATE ABT 1880
+1 WWW https://www.WikiTree.com/wiki/Sullivan-24345 
+1 FAMS @F6@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Julia was born in 1835.  She passed away about 1880.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archives
+1 REFN 44383266
+2 TYPE wikitree.user_id
+1 REFN 49016197
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+0 @I12@ INDI
+1 NAME Patrick  /Foy/
+2 GIVN Patrick
+2 SURN Foy
+1 SEX M
+1 BIRT
+2 DATE ABT 1850
+2 PLAC Ireland
+1 DEAT
+2 DATE ABT 1900
+1 WWW https://www.WikiTree.com/wiki/Foy-1466 
+1 FAMS @F7@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Patrick was born about 1830.  He passed away about 1880.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archives
+1 REFN 44383307
+2 TYPE wikitree.user_id
+1 REFN 49016241
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Comment
+2 DATE 23 Dec 2025
+2 AUTH Sorcha O'r
+2 TEXT Possible match:<p>Patrick Foy, Dublin: death 1889 <a href="https://www
+3 CONC .irishgenealogy.ie/view/?record_id=cide-6221713" class="external free"
+3 CONC  title="https://www.irishgenealogy.ie/view/?record_id=cide-6221713" re
+3 CONC l="nofollow">https://www.irishgenealogy.ie/view/?record_id=cide-622171
+3 CONC 3</a>. age est. 59.
+3 CONT Father of Frederick, Francis and others.
+3 CONC Frederick Foy married Mary Murphy. Children: Patrick, Frederick, Sarah
+3 CONC , Teresa. (see census 1911)
+3 CONT Teresa is my great grandmother.
+3 CONT </p>
+0 @I13@ INDI
+1 NAME Frank  /Penning/
+2 GIVN Frank
+2 SURN Penning
+1 SEX M
+1 BIRT
+2 DATE 1880
+1 DEAT
+2 DATE 1952
+1 WWW https://www.WikiTree.com/wiki/Penning-247 
+1 FAMS @F3@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Frank was born in 1880.  He passed away in 1952.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family photos and archive collection
+1 REFN 44174226
+2 TYPE wikitree.user_id
+1 REFN 48776418
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Penning-247.jpg
+2 TITL Frank and Gertrude in Cable, WI 1925
+2 PLAC Cable, Bayfield, Wisconsin, United States
+2 DATE 1925
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Penning-247-1.jpg
+2 TITL Frank Penning in his early 20s
+2 PLAC Chicago, Cook, Illinois, United States
+2 DATE 1900
+0 @I14@ INDI
+1 NAME Gertrude  /Hermsdorf/
+2 GIVN Gertrude
+2 SURN Hermsdorf
+2 _MARN Penning
+1 SEX F
+1 BIRT
+2 DATE 1874
+2 PLAC Dresden, Königreich Sachsen, Deutsches Reich
+1 DEAT
+2 DATE 1952
+1 WWW https://www.WikiTree.com/wiki/Hermsdorf-2 
+1 FAMC @F8@
+1 FAMS @F3@
+1 NOTE [[Category:Dresden, Sachsen]]
+2 CONT == Biography ==
+2 CONT 
+2 CONT Gertrude was born about 1874.  She passed away about 1940.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archives and photo collection
+1 REFN 44174199
+2 TYPE wikitree.user_id
+1 REFN 48776388
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Hermsdorf-2.jpg
+2 TITL Portrait of Gertrude Hermsdorf
+2 PLAC Chicago
+2 DATE 1888
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Penning-247.jpg
+2 TITL Frank and Gertrude in Cable, WI 1925
+2 PLAC Cable, Bayfield, Wisconsin, United States
+2 DATE 1925
+0 @I15@ INDI
+1 NAME Frederick  /Hermsdorf/
+2 GIVN Frederick
+2 SURN Hermsdorf
+1 SEX M
+1 BIRT
+2 DATE ABT 1852
+1 DEAT
+2 DATE ABT 1926
+1 WWW https://www.WikiTree.com/wiki/Hermsdorf-3 
+1 FAMC @F9@
+1 FAMS @F8@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Frederick was born about 1852.  He passed away about 1926.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family collection
+1 REFN 44174524
+2 TYPE wikitree.user_id
+1 REFN 48776746
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Hermsdorf-3.jpg
+2 TITL Hermsdorf family 1877 (Frederick, Maria, Bruno and Gertrude)
+2 DATE 1877
+0 @I16@ INDI
+1 NAME Auguste Marie  /Grossmann/
+2 GIVN Auguste Marie
+2 SURN Grossmann
+1 SEX F
+1 BIRT
+2 DATE 1854
+1 DEAT
+2 DATE 1934
+1 WWW https://www.WikiTree.com/wiki/Grossmann-339 
+1 FAMS @F8@
+1 NOTE == Biography ==
+2 CONT 
+2 CONT Auguste Marie was born in 1854.  She passed away in 1934.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family archive collection
+1 REFN 44174537
+2 TYPE wikitree.user_id
+1 REFN 48776760
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+1 OBJE
+2 FORM Image
+2 FILE https://www.WikiTree.com/wiki/Image:Grossmann-339.jpg
+2 TITL Auguste Marie Grossmann
+2 PLAC Chicago, Cook, Illinois, United States
+2 DATE 1931
+0 @I17@ INDI
+1 NAME Michael  /Hermsdorf/
+2 GIVN Michael
+2 SURN Hermsdorf
+1 SEX M
+1 BIRT
+2 DATE 1 Feb 1825
+2 PLAC Zechau, Saxe-Altenburg, Germany
+1 DEAT
+2 DATE ABT 1890
+1 WWW https://www.WikiTree.com/wiki/Hermsdorf-4 
+1 FAMS @F9@
+1 NOTE [[Category:Kriebitzsch, Thüringen]]
+2 CONT [[Category:Meuselwitz, Thüringen]]
+2 CONT == Biography ==
+2 CONT 
+2 CONT Michael was born in 1825.  He passed away about 1890.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family photo archive
+1 REFN 44182941
+2 TYPE wikitree.user_id
+1 REFN 48786543
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+0 @I18@ INDI
+1 NAME Anna Christine  /Müller/
+2 GIVN Anna Christine
+2 _PGVN Anna
+2 SURN Müller
+2 _MARN Hermsdorf
+1 SEX F
+1 BIRT
+2 DATE 22 Jul 1823
+2 PLAC Wintersdorf, Altenburger Land, Thuringia, Germany
+1 DEAT
+2 DATE 4 May 1859
+2 PLAC Wintersdorf, Altenburger Land, Thuringia, Germany
+1 WWW https://www.WikiTree.com/wiki/Müller-18549 
+1 FAMS @F9@
+1 NOTE [[Category:Meuselwitz, Thüringen]]
+2 CONT == Biography ==
+2 CONT 
+2 CONT Anna was born in 1823.  She passed away in 1859.
+2 CONT == Sources ==
+2 CONT <references />
+2 CONT * Edward Blake family photo archives
+1 REFN 44182952
+2 TYPE wikitree.user_id
+1 REFN 48786555
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+0 @I20@ INDI
+1 NAME James Ward /Dower/
+2 GIVN James
+2 _PGVN Jim
+2 _MIDN Ward
+2 SURN Dower
+1 SEX M
+1 BIRT
+2 DATE 6 Jun 1917
+1 DEAT
+2 DATE 26 Nov 1972
+1 WWW https://www.WikiTree.com/wiki/Dower-348 
+1 REFN 44173447
+2 TYPE wikitree.user_id
+1 REFN 48775559
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+0 @I21@ INDI
+1 NAME Mary Catherine  /Hurn/
+2 GIVN Mary Catherine
+2 _PGVN Tink
+2 SURN Hurn
+2 _MARN Dower
+1 SEX F
+1 BIRT
+2 DATE 18 Oct 1918
+1 DEAT
+2 DATE 1 Dec 1998
+1 WWW https://www.WikiTree.com/wiki/Hurn-212 
+1 REFN 41811286
+2 TYPE wikitree.user_id
+1 REFN 46135717
+2 TYPE wikitree.page_id
+1 REFN 60
+2 TYPE wikitree.privacy
+0 @I22@ INDI
+1 NAME Anonymous
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 MARR
+2 DATE 15 Oct 1932
+0 @F2@ FAM
+1 HUSB @I8@
+1 WIFE @I9@
+1 CHIL @I2@
+1 MARR
+0 @F3@ FAM
+1 HUSB @I13@
+1 WIFE @I14@
+1 CHIL @I3@
+1 MARR
+2 DATE 5 Mar 1907
+0 @F4@ FAM
+1 HUSB @I20@
+1 WIFE @I21@
+1 CHIL @I4@
+0 @F5@ FAM
+1 HUSB @I1@
+1 WIFE @I4@
+1 CHIL @I5@
+1 CHIL @I6@
+1 CHIL @I7@
+1 MARR
+2 DATE 4 Sep 1974
+2 PLAC Michigan, United States
+0 @F6@ FAM
+1 HUSB @I10@
+1 WIFE @I11@
+1 CHIL @I8@
+1 MARR
+0 @F7@ FAM
+1 HUSB @I12@
+1 CHIL @I9@
+0 @F8@ FAM
+1 HUSB @I15@
+1 WIFE @I16@
+1 CHIL @I14@
+1 MARR
+2 DATE 13 Jul 1874
+0 @F9@ FAM
+1 HUSB @I17@
+1 WIFE @I18@
+1 CHIL @I15@
+1 MARR
+2 DATE 7 Nov 1848
+2 PLAC Wintersdorf, Altenburger Land, Thuringia, Germany
+0 @F10@ FAM
+1 HUSB @I6@
+1 WIFE @I22@
+1 MARR
+2 DATE 31 May 2016
+2 PLAC Brooklyn, New York City, New York, United States
+0 TRLR
